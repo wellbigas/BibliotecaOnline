@@ -18,3 +18,5 @@ def get_db_connection():
         port=POSTGRESQL_PORT
     )
     return connection
+
+

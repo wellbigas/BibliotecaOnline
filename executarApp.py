@@ -1,5 +1,8 @@
+import flask
 from flask import Flask, render_template, request, redirect
-import psycopg2
+import importlib
+
+importlib.reload(flask)
 
 # importações das classes usadas
 from classes import Biblioteca, Livro
@@ -28,7 +31,7 @@ def adicionar_livro():
         autor = request.form['autor']
         ano = int(request.form['ano'])
         livro = Livro(titulo, autor, ano)
-        biblioteca.adicionar_livro(livro)
+        livro.adicionar_livro(livro)
         connection = get_db_connection()
         inserir_no_banco_livro(connection, titulo, autor, ano)
         return redirect('/Inicio')
@@ -49,7 +52,32 @@ def adicionar_biblioteca():
     return render_template('adicionar_biblioteca.html')
 
 
+@app.route('/listar_bibliotecas', methods=['GET'])
+def listar_bibliotecas():
+    connection = get_db_connection()
+    cursor = connection.cursor()
 
+    # Executar a consulta SQL utilizando da classe consultar
+    cursor.execute(consultar_bibliotecas)
+
+    # Obter os resultados da consulta
+    resultados = cursor.fetchall()
+
+    # Iterar pelos resultados e retornar linha a linha
+    for linha in resultados:
+        primeira_coluna = linha[0]
+        segunda_coluna = linha[1]
+        terceira_coluna = linha[2]
+        # Faça o que desejar com as colunas aqui
+        print(f"Primeira coluna: {primeira_coluna}")
+        print(f"Segunda coluna: {segunda_coluna}")
+        print(f"Terceira coluna: {terceira_coluna}")
+
+    # Fechar o cursor e a conexão com o banco de dados
+    cursor.close()
+    connection.close()
+
+    return render_template('listar_bibliotecas.html', bibliotecas=resultados)
 
 
 if __name__ == '__main__':

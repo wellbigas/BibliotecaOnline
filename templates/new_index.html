@@ -207,41 +207,61 @@
         <h3 class="modal-title">Listar Bibliotecas</h3>
         <!-- Botão para fechar o modal -->
         <button type="button" class="close" onclick="fecharModalListarBibliotecas()">&times;</button>
-      </div>
-      <!-- Corpo do modal -->
-      <div class="modal-body">
-        <!-- Tabela para exibir as bibliotecas -->
-        <table class="table">
-
-
-
-          <!-- Cabeçalho da tabela -->
+        <head>
+        <body>
+        <table action="/listar_bibliotecas" method="GET">
           <thead>
             <tr>
-              <th>Nome da Biblioteca</th>
+              <th>ID</th>
+              <th>Nome</th>
               <th>Endereço</th>
             </tr>
           </thead>
-        <tbody>
-          {% for biblioteca in bibliotecas %}
-          <tr>
-            <td>{{ biblioteca.nome }}</td>
-            <td>{{ biblioteca.endereco }}</td>
-            <td>
-              <form action="/remover_biblioteca/{{ biblioteca.id }}" method="POST">
-                <!-- biblioteca.id representa o ID da biblioteca -->
-                <button type="submit">Remover</button>
-              </form>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-
-
-        </table>
+          <tbody>
+            {% for resultados in resultados %}
+            <tr>
+              <td>{{ primeira_coluna }}</td>
+              <td>{{ segunda_coluna }}</td>
+              <td>{{ terceira_coluna }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+  </table>
+</body>
+        </head>
       </div>
     </div>
   </div>
+
+
+
+<html>
+<head>
+  <title>Listar Bibliotecas</title>
+</head>
+<body>
+  <h2>Listar Bibliotecas</h2>
+  <table action="/listar_bibliotecas" method="GET">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Endereço</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for biblioteca in bibliotecas %}
+      <tr>
+        <td>{{ biblioteca[1] }}</td>
+        <td>{{ biblioteca[2] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+
+
+
 
   <script>
     // Função para abrir o modal de listar livros

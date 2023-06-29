@@ -26,9 +26,9 @@ def inserir_no_banco_biblioteca(conexao, nome, endereco):
     cursor.close()
     conexao.close()
 
-def consultar_bibliotecas(conexao):
+def consultar_bibliotecas(conexao, nome, endereco):
     cursor = conexao.cursor()
-    cursor.execute("SELECT nome, endereco FROM biblioteca")
+    cursor.execute("SELECT nome, endereco FROM biblioteca", nome, endereco)
     bibliotecas = cursor.fetchall()
     cursor.close()
     conexao.close()
