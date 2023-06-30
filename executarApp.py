@@ -5,7 +5,8 @@ import psycopg2
 from classes import Biblioteca, Livro
 
 # importação de inserção no banco de dados
-from manipularBancoDeDados import inserir_no_banco_biblioteca, inserir_no_banco_livro, consultar_bibliotecas
+from manipularBancoDeDados import inserir_no_banco_biblioteca, inserir_no_banco_livro, consultar_bibliotecas, \
+    consultar_livros
 
 # importação de conexão banco de dados
 from dbConection import get_db_connection
@@ -16,11 +17,12 @@ biblioteca = Biblioteca("Biblioteca Central",
                         "Rua Principal, 123")  ## ver com will como fazer para assim que adicionar um livro ele referenciar ao id da biblioteca
 
 
-@app.route('/Inicio')
+@app.route('/')
 def index():
     connection = get_db_connection();
     bibliotecas = consultar_bibliotecas(connection);
-    return render_template('new_index.html', bibliotecas=bibliotecas)
+    livros = consultar_livros(connection);
+    return render_template('new_index.html', bibliotecas=bibliotecas, livros=livros)
 
 
 @app.route('/adicionar_livro', methods=['GET', 'POST'])
@@ -33,7 +35,7 @@ def adicionar_livro():
         biblioteca.adicionar_livro(livro)
         connection = get_db_connection()
         inserir_no_banco_livro(connection, titulo, autor, ano)
-        return redirect('/Inicio')
+        return redirect('/')
     return render_template('adicionar_livro.html')
 
 
@@ -47,8 +49,15 @@ def adicionar_biblioteca():
         biblioteca = nova_biblioteca
         connection = get_db_connection()
         inserir_no_banco_biblioteca(connection, nome, endereco)
-        return redirect('/Inicio')
+        return redirect('/')
     return render_template('adicionar_biblioteca.html')
+
+@app.route('/deletar_livro/<id>', methods=['DELETE'])
+def deletar_livro(id):
+    connection = get_db_connection()
+    deletar_livro(connection, id)
+    connection.close()
+    return redirect('/')
 
 
 

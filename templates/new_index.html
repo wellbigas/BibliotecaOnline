@@ -130,31 +130,34 @@
       </div>
       <!-- Corpo do modal -->
       <div class="modal-body">
-        <!-- Tabela para exibir os livros -->
         <table class="table">
           <!-- Cabeçalho da tabela -->
           <thead>
             <tr>
-              <th>Título</th>
+              <th>ID</th>
+              <th>Titulo</th>
               <th>Autor</th>
               <th>Ano de Publicação</th>
             </tr>
           </thead>
-          <!-- Corpo da tabela -->
-          <tbody>
-            {% for livro in livros %}
-            <tr>
-              <td>{{ livro[1] }}</td>
-              <td>{{ livro[2] }}</td>
-              <td>{{ livro[3] }}</td>
-              <td>
-                <form action="/remover_livro/{{ loop.index0 }}" method="post"> <!-- loop.index0 representa o índice do livro na lista -->
-                  <button type="submit">Remover</button>
-                </form>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
+        <tbody>
+          {% for livro in livros %}
+          <tr>
+            <td>{{ livro.id }}</td>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.autor }}</td>
+            <td>{{ livro.anoDePublicacao }}</td>
+            <td>
+              <form action="/deletar_livro/{{ livro.id }}" method="DELETE">
+                <!-- biblioteca.id representa o ID da biblioteca -->
+                <button type="submit">Remover</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+
+
         </table>
       </div>
     </div>
@@ -210,16 +213,7 @@
       </div>
       <!-- Corpo do modal -->
       <div class="modal-body">
-        <!-- Tabela para exibir as bibliotecas -->
-
-      </div>
-    </div>
-  </div>
-
-   <table class="table">
-
-
-
+        <table class="table">
           <!-- Cabeçalho da tabela -->
           <thead>
             <tr>
@@ -244,6 +238,11 @@
 
 
         </table>
+        <!-- Tabela para exibir as bibliotecas -->
+
+      </div>
+    </div>
+  </div>
 
   <script>
     // Função para abrir o modal de listar livros

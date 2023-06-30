@@ -5,7 +5,7 @@ POSTGRESQL_IP = "localhost"  # Nome do serviço Docker
 POSTGRESQL_LOGIN = "postgres"
 POSTGRESQL_PASSWORD = "postgrespw"
 POSTGRESQL_DATABASE = "postgres"
-POSTGRESQL_PORT = 5432  # Porta padrão do PostgreSQL no Docker
+POSTGRESQL_PORT = 5435  # Porta padrão do PostgreSQL no Docker
 
 
 # Função de conexão com o banco de dados
