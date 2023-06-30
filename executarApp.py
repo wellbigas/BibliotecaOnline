@@ -18,7 +18,9 @@ biblioteca = Biblioteca("Biblioteca Central",
 
 @app.route('/Inicio')
 def index():
-    return render_template('new_index.html', biblioteca=Biblioteca, livro=Livro)
+    connection = get_db_connection();
+    bibliotecas = consultar_bibliotecas(connection);
+    return render_template('new_index.html', bibliotecas=bibliotecas)
 
 
 @app.route('/adicionar_livro', methods=['GET', 'POST'])
