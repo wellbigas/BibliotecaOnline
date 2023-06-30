@@ -62,10 +62,9 @@ def consultar_livros(conexao):
     conexao.close()
     return list
 
-def deletar_livro(conexao, id):
+def deletar_livro_do_banco_de_dados(conexao, id):
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM livro WHERE id = %s", (id))
-    cursor.rowcount()
+    cursor.execute("DELETE FROM livro WHERE id_livro = %s", (id,))
     linhasDeletadas = cursor.rowcount
 
     conexao.commit()

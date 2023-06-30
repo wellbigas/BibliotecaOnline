@@ -6,7 +6,7 @@ from classes import Biblioteca, Livro
 
 # importação de inserção no banco de dados
 from manipularBancoDeDados import inserir_no_banco_biblioteca, inserir_no_banco_livro, consultar_bibliotecas, \
-    consultar_livros
+    consultar_livros, deletar_livro_do_banco_de_dados
 
 # importação de conexão banco de dados
 from dbConection import get_db_connection
@@ -52,10 +52,10 @@ def adicionar_biblioteca():
         return redirect('/')
     return render_template('adicionar_biblioteca.html')
 
-@app.route('/deletar_livro/<id>', methods=['POST'])
+@app.route('/deletar_livro/<int:id>', methods=['POST'])
 def deletar_livro(id):
     connection = get_db_connection()
-    deletar_livro(connection, id)
+    deletar_livro_do_banco_de_dados(connection, id)
     connection.close()
     return redirect('/')
 
