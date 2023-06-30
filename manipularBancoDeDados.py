@@ -53,13 +53,14 @@ def consultar_livros(conexao):
     list = []
     for linha in linhas:
     # appending instances to list
-        list.append(Livro.construir_com_id(linha[0], linha[1], linha[2], linha[3], linha[7]))
+        livro = Livro(linha[0], linha[1], linha[2], linha[3], linha[7])
 
-    linhas = list
+        list.append(livro)
+
 
     cursor.close()
     conexao.close()
-    return linhas
+    return list
 
 def deletar_livro(conexao, id):
     cursor = conexao.cursor()

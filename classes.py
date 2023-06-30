@@ -4,11 +4,12 @@ class Livro:
         self.autor = autor
         self.anoDePublicacao = anoDePublicacao
 
-    def construir_com_id(self, id, titulo, autor, anoDePublicacao):
+    def __init__(self, id, titulo, autor, anoDePublicacao, idBiblioteca):
         self.id = id
         self.titulo = titulo
         self.autor = autor
         self.anoDePublicacao = anoDePublicacao
+        self.biblioteca_id = idBiblioteca
 
 
 class Biblioteca:

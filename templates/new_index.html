@@ -148,7 +148,7 @@
             <td>{{ livro.autor }}</td>
             <td>{{ livro.anoDePublicacao }}</td>
             <td>
-              <form action="/deletar_livro/{{ livro.id }}" method="DELETE">
+              <form action="/deletar_livro/{{ livro.id }}" method="POST">
                 <!-- biblioteca.id representa o ID da biblioteca -->
                 <button type="submit">Remover</button>
               </form>

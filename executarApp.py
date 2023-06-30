@@ -52,7 +52,7 @@ def adicionar_biblioteca():
         return redirect('/')
     return render_template('adicionar_biblioteca.html')
 
-@app.route('/deletar_livro/<id>', methods=['DELETE'])
+@app.route('/deletar_livro/<id>', methods=['POST'])
 def deletar_livro(id):
     connection = get_db_connection()
     deletar_livro(connection, id)
